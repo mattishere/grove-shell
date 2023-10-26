@@ -3,27 +3,36 @@ package run
 import (
 	"os"
 	"os/exec"
-	"strings"
+
+	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/lex"
 )
 
-func RunCommand(input string) (bool, error) {
-    split := strings.Split(strings.TrimSpace(input), " ")
-    command := split[0]
-    args := split[1:]
+func RunCommand(handler *cmd.CommandHandler, input string) (bool, error) {
+	tokens := lex.Lex(input)
+	commandName := tokens[0]
+	args := tokens[1:]
+	if commandName == "exit" {
+		return true, nil
+	}
 
-    if command == "exit" {
-        return true, nil
-    }
-
-    cmd := exec.Command(command, args...)
-    cmd.Stdin = os.Stdin
-    cmd.Stdout = os.Stdout
-    cmd.Stderr = os.Stderr
-
-    err := cmd.Run()
+	exists, err := handler.RunCmd(commandName, args)
     if err != nil {
         return false, err
     }
+
+    if !exists {
+
+		command := exec.Command(commandName, args...)
+		command.Stdin = os.Stdin
+		command.Stdout = os.Stdout
+		command.Stderr = os.Stderr
+
+		err := command.Run()
+		if err != nil {
+			return false, err
+		}
+	}
 
     return false, nil
 }
