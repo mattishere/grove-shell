@@ -5,6 +5,7 @@ import (
 	"os/exec"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/expand"
 	"github.com/groveshell/grove-shell/internal/lex"
 )
 
@@ -13,12 +14,21 @@ func RunCommand(handler *cmd.CommandHandler, input string) error {
 	commandName := tokens[0]
 	args := tokens[1:]
 
-	exists, err := handler.RunCmd(commandName, args)
-    if err != nil {
-        return err
+	expanderHandler := expand.NewExpanderHandler(
+		&expand.HomeDirExpander{},
+		&expand.EnvironmentExpander{},
+	)
+
+    for i, arg := range args {
+        args[i] = expanderHandler.Expand(arg)
     }
 
-    if !exists {
+	exists, err := handler.RunCmd(commandName, args)
+	if err != nil {
+		return err
+	}
+
+	if !exists {
 
 		command := exec.Command(commandName, args...)
 		command.Stdin = os.Stdin
@@ -31,5 +41,5 @@ func RunCommand(handler *cmd.CommandHandler, input string) error {
 		}
 	}
 
-    return nil
+	return nil
 }

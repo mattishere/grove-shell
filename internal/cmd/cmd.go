@@ -19,7 +19,6 @@ func (cd CdCommand) Name() string {
 	return "cd"
 }
 
-// to-do: add support for spaces! ("/projects/grove shell" e.g.)
 func (cd CdCommand) Run(args []string) error {
 	if len(args) == 0 || args[0] == "~" {
 		home, err := os.UserHomeDir()
@@ -45,7 +44,6 @@ func (echo EchoCommand) Run(args []string) error {
 
     for _, arg := range args {
         if utils.IsString(arg) {
-            // TO-DO: later, these will ignore insertions from the shell (~ -> home dir etc.)
             msg += arg[1:len(arg)-1] + " "
         } else {
             msg += arg + " "
