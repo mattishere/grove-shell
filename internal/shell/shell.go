@@ -5,29 +5,29 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strings"   
+	"strings"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
 	"github.com/groveshell/grove-shell/internal/run"
 )
 
 func StartShell() {
-    reader := bufio.NewReader(os.Stdin)
+	reader := bufio.NewReader(os.Stdin)
 
-    cmdHandler := cmd.NewCommandHandler()
-    cmdHandler.RegisterNew(cmd.CdCommand{})
-    cmdHandler.RegisterNew(cmd.EchoCommand{})
-    cmdHandler.RegisterNew(cmd.ExitCommand{})
+	cmdHandler := cmd.NewCommandHandler()
+	cmdHandler.RegisterNew(cmd.CdCommand{})
+	cmdHandler.RegisterNew(cmd.EchoCommand{})
+	cmdHandler.RegisterNew(cmd.ExitCommand{})
 
-    for {
-        fmt.Print("-> ")
-        input, err := reader.ReadString('\n')
-        if err != nil {
-            log.Fatal("Failed to read input.")
-        }
-        err = run.RunCommand(cmdHandler, strings.TrimSpace(input))
-        if err != nil {
-            fmt.Fprintln(os.Stderr, err)
-        }
-    }
+	for {
+		fmt.Print("-> ")
+		input, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal("Failed to read input.")
+		}
+		err = run.RunCommand(cmdHandler, strings.TrimSpace(input))
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+	}
 }

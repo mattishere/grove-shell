@@ -19,9 +19,9 @@ func RunCommand(handler *cmd.CommandHandler, input string) error {
 		&expand.EnvironmentExpander{},
 	)
 
-    for i, arg := range args {
-        args[i] = expanderHandler.Expand(arg)
-    }
+	for i, arg := range args {
+		args[i] = expanderHandler.Expand(arg)
+	}
 
 	exists, err := handler.RunCmd(commandName, args)
 	if err != nil {

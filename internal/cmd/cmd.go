@@ -36,42 +36,42 @@ func (cd CdCommand) Run(args []string) error {
 type EchoCommand struct{}
 
 func (echo EchoCommand) Name() string {
-    return "echo"
+	return "echo"
 }
 
 func (echo EchoCommand) Run(args []string) error {
-    var msg string
+	var msg string
 
-    for _, arg := range args {
-        if utils.IsString(arg) {
-            msg += arg[1:len(arg)-1] + " "
-        } else {
-            msg += arg + " "
-        }
-    }
+	for _, arg := range args {
+		if utils.IsString(arg) {
+			msg += arg[1:len(arg)-1] + " "
+		} else {
+			msg += arg + " "
+		}
+	}
 
-    fmt.Println(msg)
+	fmt.Println(msg)
 
-    return nil
+	return nil
 }
 
 type ExitCommand struct{}
 
 func (exit ExitCommand) Name() string {
-    return "exit"
+	return "exit"
 }
 
 func (exit ExitCommand) Run(args []string) error {
-    if len(args) == 0 {
-        os.Exit(0)
-    } else {
-        exitCode, err := strconv.Atoi(args[0])
-        if err != nil || exitCode < 0 || exitCode > 255 {
-            os.Exit(0)
-        } else {
-            os.Exit(exitCode)
-        }
-    }
+	if len(args) == 0 {
+		os.Exit(0)
+	} else {
+		exitCode, err := strconv.Atoi(args[0])
+		if err != nil || exitCode < 0 || exitCode > 255 {
+			os.Exit(0)
+		} else {
+			os.Exit(exitCode)
+		}
+	}
 
-    return nil
+	return nil
 }

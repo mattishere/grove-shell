@@ -12,9 +12,9 @@ func Lex(input string) []string {
 				if !isString {
 					tokens = append(tokens, current)
 					current = ""
-                } else {
-                    current += string(char)
-                }
+				} else {
+					current += string(char)
+				}
 			}
 		case '"':
 			isString = !isString
