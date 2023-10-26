@@ -16,6 +16,7 @@ func StartShell() {
 
     handler := cmd.NewCommandHandler()
     handler.RegisterNew(cmd.CdCommand{})
+    handler.RegisterNew(cmd.EchoCommand{})
 
     for {
         fmt.Print("# ")
