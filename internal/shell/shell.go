@@ -17,20 +17,18 @@ func StartShell() {
     handler := cmd.NewCommandHandler()
     handler.RegisterNew(cmd.CdCommand{})
     handler.RegisterNew(cmd.EchoCommand{})
+    handler.RegisterNew(cmd.ExitCommand{})
 
     for {
-        fmt.Print("# ")
+        fmt.Print("-> ")
         input, err := reader.ReadString('\n')
         if err != nil {
             log.Fatal("Failed to read input.")
         }
 
-        hasQuit, err := run.RunCommand(handler, strings.TrimSpace(input))
+        err = run.RunCommand(handler, strings.TrimSpace(input))
         if err != nil {
             fmt.Fprintln(os.Stderr, err)
-        }
-        if hasQuit {
-            break
         }
     }
 }

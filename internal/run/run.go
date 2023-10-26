@@ -8,17 +8,14 @@ import (
 	"github.com/groveshell/grove-shell/internal/lex"
 )
 
-func RunCommand(handler *cmd.CommandHandler, input string) (bool, error) {
+func RunCommand(handler *cmd.CommandHandler, input string) error {
 	tokens := lex.Lex(input)
 	commandName := tokens[0]
 	args := tokens[1:]
-	if commandName == "exit" {
-		return true, nil
-	}
 
 	exists, err := handler.RunCmd(commandName, args)
     if err != nil {
-        return false, err
+        return err
     }
 
     if !exists {
@@ -30,9 +27,9 @@ func RunCommand(handler *cmd.CommandHandler, input string) (bool, error) {
 
 		err := command.Run()
 		if err != nil {
-			return false, err
+			return err
 		}
 	}
 
-    return false, nil
+    return nil
 }

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/groveshell/grove-shell/internal/utils"
 )
@@ -52,6 +53,27 @@ func (echo EchoCommand) Run(args []string) error {
     }
 
     fmt.Println(msg)
+
+    return nil
+}
+
+type ExitCommand struct{}
+
+func (exit ExitCommand) Name() string {
+    return "exit"
+}
+
+func (exit ExitCommand) Run(args []string) error {
+    if len(args) == 0 {
+        os.Exit(0)
+    } else {
+        exitCode, err := strconv.Atoi(args[0])
+        if err != nil || exitCode < 0 || exitCode > 255 {
+            os.Exit(0)
+        } else {
+            os.Exit(exitCode)
+        }
+    }
 
     return nil
 }
