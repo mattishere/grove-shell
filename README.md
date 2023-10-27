@@ -19,14 +19,14 @@ git clone https://github.com/groveshell/grove-shell && cd grove-shell && sudo ma
 > At the moment, releases are only made periodically. If you want the bleeding-edge, then the method above is superior.
 
 ## Usage
-- After installing Grove, you can start a session/REPL like so: `grove`. After that, it's fairly straight forward as it is a very similar experience to most other Linux shells.
+- After installing Grove, you can start a session/REPL with the command `grove`. After that, it's fairly straight forward as it is a very similar experience to most other Linux shells.
 
 ## Features
 > [!IMPORTANT]
-> At the time of writing this, Grove is still missing many important features. Due to the current **frequency** of updates to the project this list will not be updated until it reaches a *"bare minimum"*. After that threshold is reached, expect this to be accurate again!
+> At the time of writing this, Grove is still missing many important features. Due to the current **frequency** of updates to the project, this list will not be updated until it reaches a *"bare minimum"* in functionality and featureset. After that threshold is reached, expect this list to be accurate again!
 
 - File navigation with `cd`
 - A basic implemenation of `echo`
 - String expansion of environment variables (`$VARIABLE` -> `value`)
-- Home directory expansion (`~`` -> `/home/user`)
+- Home directory expansion (`~` -> `/home/user`)
 - Strings (`'raw string'`, `"normal string"`)
