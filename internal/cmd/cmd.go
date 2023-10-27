@@ -20,14 +20,24 @@ func (cd CdCommand) Name() string {
 }
 
 func (cd CdCommand) Run(args []string) error {
-	if len(args) == 0 || args[0] == "~" {
+    path := args[0]
+    
+    if utils.IsString(path) || utils.IsRawString(path) {
+        path = path[1:len(path)-1]
+        fmt.Println(path)
+    }
+
+	if len(args) == 0 {
 		home, err := os.UserHomeDir()
 		if err != nil {
 			return err
 		}
 		os.Chdir(home)
 	} else {
-		os.Chdir(args[0])
+        err := os.Chdir(path)
+        if err != nil {
+            return fmt.Errorf("path error: %s not found", path)
+        }
 	}
 
 	return nil
@@ -43,7 +53,7 @@ func (echo EchoCommand) Run(args []string) error {
 	var msg string
 
 	for _, arg := range args {
-		if utils.IsString(arg) {
+		if utils.IsString(arg) || utils.IsRawString(arg) {
 			msg += arg[1:len(arg)-1] + " "
 		} else {
 			msg += arg + " "

@@ -16,7 +16,7 @@ func Lex(input string) []string {
 					current += string(char)
 				}
 			}
-		case '"':
+		case '"', '\'':
 			isString = !isString
 			current += string(char)
 		default:

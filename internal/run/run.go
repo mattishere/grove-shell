@@ -7,6 +7,7 @@ import (
 	"github.com/groveshell/grove-shell/internal/cmd"
 	"github.com/groveshell/grove-shell/internal/expand"
 	"github.com/groveshell/grove-shell/internal/lex"
+	"github.com/groveshell/grove-shell/internal/utils"
 )
 
 func RunCommand(handler *cmd.CommandHandler, input string) error {
@@ -20,7 +21,9 @@ func RunCommand(handler *cmd.CommandHandler, input string) error {
 	)
 
 	for i, arg := range args {
-		args[i] = expanderHandler.Expand(arg)
+		if !utils.IsRawString(args[i]) {
+			args[i] = expanderHandler.Expand(arg)
+		}
 	}
 
 	exists, err := handler.RunCmd(commandName, args)

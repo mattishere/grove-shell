@@ -9,3 +9,11 @@ func IsString(input string) bool {
 
 	return false
 }
+
+func IsRawString(input string) bool {
+    if strings.HasPrefix(input, "'") && strings.HasSuffix(input, "'") {
+        return true
+    }
+
+    return false
+}
