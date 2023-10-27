@@ -20,6 +20,9 @@ jobs:
       with:
         go-version: '1.21'
 
+    - name: File contents
+      run: ls -R
+
     - name: Build
       run: |
         cd cmd/grove-shell
