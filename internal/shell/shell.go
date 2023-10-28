@@ -25,7 +25,14 @@ func StartShell() {
 		if err != nil {
 			log.Fatal("Failed to read input.")
 		}
-		err = run.RunCommand(cmdHandler, strings.TrimSpace(input))
+
+        input = strings.TrimSpace(input)
+
+        if input == "" {
+            continue
+        }
+
+		err = run.RunCommand(cmdHandler, input)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
