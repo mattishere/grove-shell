@@ -27,7 +27,7 @@ git clone https://github.com/groveshell/grove-shell && cd grove-shell && sudo ma
 [customization]
 prompt = "myprompt$ " # at the moment, prompts are only simple strings. Better prompt customization is coming soon!
 
-[aliases] #aliases can only be one word, and are not recursive (you cannot use an alias inside of an alias, this may change in the future).
+[aliases] # aliases can only be one word, and are not recursive (you cannot use an alias inside of an alias, this may change in the future).
 nf = "neofetch"
 ls = "ls --color=auto"
 ```
