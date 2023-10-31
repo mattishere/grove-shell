@@ -21,6 +21,17 @@ git clone https://github.com/groveshell/grove-shell && cd grove-shell && sudo ma
 ## Usage
 - After installing Grove, you can start a session/REPL with the command `grove`. After that, it's fairly straight forward as it is a very similar experience to most other Linux shells.
 
+## Configuration
+- You can create a configuration file in your home directory. Name it `.groverc` (the file uses the TOML format, but should **not** have the .toml file extension). It should follow the format below, otherwise Grove will use a default configuration.
+```toml
+[customization]
+prompt = "myprompt$ " # at the moment, prompts are only simple strings. Better prompt customization is coming soon!
+
+[aliases] #aliases can only be one word, and are not recursive (you cannot use an alias inside of an alias, this may change in the future).
+nf = "neofetch"
+ls = "ls --color=auto"
+```
+
 ## Features
 > [!IMPORTANT]
 > At the time of writing this, Grove is still missing many important features. Due to the current **frequency** of updates to the project, this list will not be updated until it reaches a *"bare minimum"* in functionality and featureset. After that threshold is reached, expect this list to be accurate again!
