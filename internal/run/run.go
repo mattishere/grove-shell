@@ -5,18 +5,15 @@ import (
 	"os/exec"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
-	"github.com/groveshell/grove-shell/internal/config"
 	"github.com/groveshell/grove-shell/internal/expand"
 	"github.com/groveshell/grove-shell/internal/lex"
 	"github.com/groveshell/grove-shell/internal/utils"
 )
 
-func RunCommand(handler *cmd.CommandHandler, input string, config config.Config) error {
+func RunCommand(handler *cmd.CommandHandler, input string) error {
 	tokens := lex.Lex(input)
 	commandName := tokens[0]
 	args := tokens[1:]
-
-    aliases := config.Aliases
 
 	expanderHandler := expand.NewExpanderHandler(
 		&expand.HomeDirExpander{},
@@ -29,13 +26,7 @@ func RunCommand(handler *cmd.CommandHandler, input string, config config.Config)
 		}
 	}
 
-    if value, ok := aliases[commandName]; ok {
-        aliasTokens := lex.Lex(value)
-        commandName = aliasTokens[0]
-        args = append(aliasTokens[1:], args...)
-    }
-
-	exists, err := handler.RunCmd(commandName, args)
+    exists, err := handler.RunCmd(commandName, args)
 	if err != nil {
 		return err
 	}

@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
-	"github.com/groveshell/grove-shell/internal/config"
 	"github.com/groveshell/grove-shell/internal/run"
 )
 
@@ -22,10 +21,9 @@ func StartShell() {
 	cmdHandler.RegisterNew(cmd.ExitCommand{})
     cmdHandler.RegisterNew(cmd.PWDCommand{})
 
-    config := config.GetConfig()
 
 	for {
-        fmt.Print(config.Customization.Prompt)
+        fmt.Print(Prompt())
 		input, err := reader.ReadString('\n')
 		if err != nil {
 			log.Fatal("Failed to read input.")
@@ -39,7 +37,7 @@ func StartShell() {
 
 
 
-		err = run.RunCommand(cmdHandler, input, config)
+		err = run.RunCommand(cmdHandler, input)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
