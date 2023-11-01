@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/groveshell/grove-shell/internal/utils"
 )
@@ -100,6 +101,36 @@ func (pwd PWDCommand) Run(args []string) error {
     }
     
     fmt.Println(wd)
+
+    return nil
+}
+
+type ExportCommand struct{}
+
+func (export ExportCommand) Name() string {
+    return "export"
+}
+
+func (export ExportCommand) Run(args []string) error {
+    if len(args) >= 2 {
+        name := args[0]
+        values := args[1:]
+        
+        var finalValues []string
+        for _, value := range values {
+            if utils.IsString(value) || utils.IsRawString(value) {
+                finalValues = append(finalValues, value[1:len(value)-1])
+            } else {
+                finalValues = append(finalValues, value)
+            }
+        }
+
+        final := strings.Join(finalValues, " ")
+        err := os.Setenv(name, final)
+        if err != nil {
+            return err
+        }
+    }
 
     return nil
 }

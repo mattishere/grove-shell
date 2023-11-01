@@ -9,18 +9,38 @@ import (
 	"strings"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/files"
 	"github.com/groveshell/grove-shell/internal/run"
 )
 
 func StartShell() {
-	reader := bufio.NewReader(os.Stdin)
-
 	cmdHandler := cmd.NewCommandHandler()
 	cmdHandler.RegisterNew(cmd.CdCommand{})
 	cmdHandler.RegisterNew(cmd.EchoCommand{})
 	cmdHandler.RegisterNew(cmd.ExitCommand{})
     cmdHandler.RegisterNew(cmd.PWDCommand{})
+    cmdHandler.RegisterNew(cmd.ExportCommand{})
 
+
+
+    
+    if len(os.Args) > 1 {
+        lines, err := files.ReadFile(os.Args[1])
+        if err != nil {
+            fmt.Fprintln(os.Stderr, err)
+        }
+
+        for _, line := range lines[0:len(lines)-1] {
+            err = run.RunCommand(cmdHandler, line)
+            if err != nil {
+                fmt.Fprintln(os.Stderr, err)
+            }
+        }
+        return
+    }
+    
+
+	reader := bufio.NewReader(os.Stdin)
 
 	for {
         fmt.Print(Prompt())

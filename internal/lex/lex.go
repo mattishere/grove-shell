@@ -19,6 +19,12 @@ func Lex(input string) []string {
 		case '"', '\'':
 			isString = !isString
 			current += string(char)
+        case '#':
+            if current == "" && !isString {
+                return tokens
+            } else {
+                current += string(char)
+            }
 		default:
 			current += string(char)
 		}

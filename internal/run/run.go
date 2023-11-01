@@ -12,6 +12,9 @@ import (
 
 func RunCommand(handler *cmd.CommandHandler, input string) error {
 	tokens := lex.Lex(input)
+    if len(tokens) == 0 {
+        return nil
+    }
 	commandName := tokens[0]
 	args := tokens[1:]
 
