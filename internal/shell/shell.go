@@ -8,20 +8,19 @@ import (
 	"os/user"
 	"strings"
 
-	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/command"
 	"github.com/groveshell/grove-shell/internal/env"
 	"github.com/groveshell/grove-shell/internal/files"
 	"github.com/groveshell/grove-shell/internal/run"
 )
 
+
+
 func StartShell() {
-	cmdHandler := cmd.NewCommandHandler()
-	cmdHandler.RegisterNew(cmd.CdCommand{})
-	cmdHandler.RegisterNew(cmd.EchoCommand{})
-	cmdHandler.RegisterNew(cmd.ExitCommand{})
-	cmdHandler.RegisterNew(cmd.PWDCommand{})
-	cmdHandler.RegisterNew(cmd.ExportCommand{})
-	cmdHandler.RegisterNew(cmd.AliasCommand{})
+	cmdHandler := command.NewCommandHandler()
+    for _, cmd := range command.Commands {
+        cmdHandler.RegisterNew(cmd)
+    }
 
 	env := env.ShellEnvironment{
 		Aliases: make(map[string]string),

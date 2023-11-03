@@ -4,14 +4,14 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/command"
 	"github.com/groveshell/grove-shell/internal/env"
 	"github.com/groveshell/grove-shell/internal/expand"
 	"github.com/groveshell/grove-shell/internal/lex"
 	"github.com/groveshell/grove-shell/internal/utils"
 )
 
-func RunCommand(handler *cmd.CommandHandler, input string, shellEnv env.ShellEnvironment) error {
+func RunCommand(handler *command.CommandHandler, input string, shellEnv env.ShellEnvironment) error {
 	tokens := lex.Lex(input)
 	if len(tokens) == 0 {
 		return nil

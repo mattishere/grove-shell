@@ -1,4 +1,4 @@
-package cmd
+package command
 
 import "github.com/groveshell/grove-shell/internal/env"
 

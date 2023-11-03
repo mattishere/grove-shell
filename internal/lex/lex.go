@@ -5,6 +5,7 @@ func Lex(input string) []string {
 	current := ""
 	var isString bool
 
+    // TO DO: differentiate between normal and raw strings, this currently doesn't work as expected: "this is just testing '" (it thinks that the ' character ends the string.)
 	for _, char := range input {
 		switch char {
 		case ' ', '\r', '\t':
