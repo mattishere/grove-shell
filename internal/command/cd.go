@@ -36,7 +36,6 @@ func (cd CdCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	if utils.IsString(path) || utils.IsRawString(path) {
 		path = path[1 : len(path)-1]
-		fmt.Println(path)
 	}
 
 	err := os.Chdir(path)
