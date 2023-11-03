@@ -5,16 +5,17 @@ import (
 	"os/exec"
 
 	"github.com/groveshell/grove-shell/internal/cmd"
+	"github.com/groveshell/grove-shell/internal/env"
 	"github.com/groveshell/grove-shell/internal/expand"
 	"github.com/groveshell/grove-shell/internal/lex"
 	"github.com/groveshell/grove-shell/internal/utils"
 )
 
-func RunCommand(handler *cmd.CommandHandler, input string) error {
+func RunCommand(handler *cmd.CommandHandler, input string, shellEnv env.ShellEnvironment) error {
 	tokens := lex.Lex(input)
-    if len(tokens) == 0 {
-        return nil
-    }
+	if len(tokens) == 0 {
+		return nil
+	}
 	commandName := tokens[0]
 	args := tokens[1:]
 
@@ -29,7 +30,13 @@ func RunCommand(handler *cmd.CommandHandler, input string) error {
 		}
 	}
 
-    exists, err := handler.RunCmd(commandName, args)
+	if value, ok := shellEnv.Aliases[commandName]; ok {
+		aliasTokens := lex.Lex(value)
+		commandName = aliasTokens[0]
+		args = append(aliasTokens[1:], args...)
+	}
+
+	exists, err := handler.RunCmd(commandName, args, shellEnv)
 	if err != nil {
 		return err
 	}
