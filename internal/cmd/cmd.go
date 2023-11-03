@@ -159,20 +159,20 @@ func (alias AliasCommand) Name() string {
 func (alias AliasCommand) Run(args []string, env env.ShellEnvironment) error {
 	if len(args) == 2 {
 		aliasKey := args[0]
-        if utils.IsString(aliasKey) || utils.IsRawString(aliasKey) {
-            return fmt.Errorf("invalid alias name (cannot be string)")
-        }
+		if utils.IsString(aliasKey) || utils.IsRawString(aliasKey) {
+			return fmt.Errorf("invalid alias name (cannot be string)")
+		}
 
-        command := args[1]
-        if utils.IsString(command) || utils.IsRawString(command) {
-            command = command[1:len(command)-1]
-        }
-        env.Aliases[aliasKey] = command
-    } else if len(args) == 0 {
-        for name, alias := range env.Aliases {
-            fmt.Println(name + " -> " + alias)
-        }
-    }
+		command := args[1]
+		if utils.IsString(command) || utils.IsRawString(command) {
+			command = command[1 : len(command)-1]
+		}
+		env.Aliases[aliasKey] = command
+	} else if len(args) == 0 {
+		for name, alias := range env.Aliases {
+			fmt.Println(name + " -> " + alias)
+		}
+	}
 
-    return nil
+	return nil
 }

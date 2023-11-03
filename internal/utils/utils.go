@@ -11,9 +11,9 @@ func IsString(input string) bool {
 }
 
 func IsRawString(input string) bool {
-    if strings.HasPrefix(input, "'") && strings.HasSuffix(input, "'") {
-        return true
-    }
+	if strings.HasPrefix(input, "'") && strings.HasSuffix(input, "'") {
+		return true
+	}
 
-    return false
+	return false
 }

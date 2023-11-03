@@ -21,12 +21,11 @@ func StartShell() {
 	cmdHandler.RegisterNew(cmd.ExitCommand{})
 	cmdHandler.RegisterNew(cmd.PWDCommand{})
 	cmdHandler.RegisterNew(cmd.ExportCommand{})
-    cmdHandler.RegisterNew(cmd.AliasCommand{})
+	cmdHandler.RegisterNew(cmd.AliasCommand{})
 
-    env := env.ShellEnvironment{
-        Variables: make(map[string]string),
-        Aliases: make(map[string]string),
-    }
+	env := env.ShellEnvironment{
+		Aliases: make(map[string]string),
+	}
 
 	if len(os.Args) > 1 {
 		lines, err := files.ReadFile(os.Args[1])
@@ -44,9 +43,18 @@ func StartShell() {
 	}
 
 	reader := bufio.NewReader(os.Stdin)
+	rc := files.ReadRCFile()
+	for _, line := range rc[0 : len(rc)-1] {
+		run.RunCommand(cmdHandler, line, env)
+	}
 
 	for {
-		fmt.Print(Prompt())
+		prompt := Prompt()
+		if value, exists := os.LookupEnv("PROMPT"); exists {
+			prompt = value
+		}
+
+		fmt.Print(prompt)
 		input, err := reader.ReadString('\n')
 		if err != nil {
 			log.Fatal("Failed to read input.")
