@@ -3,9 +3,8 @@ package lex
 func Lex(input string) []string {
 	var tokens []string
 	current := ""
-	var isString bool
+	var isString, isRawString bool
 
-    // TO DO: differentiate between normal and raw strings, this currently doesn't work as expected: "this is just testing '" (it thinks that the ' character ends the string.)
 	for _, char := range input {
 		switch char {
 		case ' ', '\r', '\t':
@@ -17,9 +16,20 @@ func Lex(input string) []string {
 					current += string(char)
 				}
 			}
-		case '"', '\'':
-			isString = !isString
-			current += string(char)
+		case '"':
+			if isRawString {
+				current += string(char)
+			} else {
+				isString = !isString
+				current += string(char)
+			}
+		case '\'':
+            if isString {
+                current += string(char)
+            } else {
+                isRawString = !isRawString
+                current += string(char)
+            }
 		case '#':
 			if current == "" && !isString {
 				return tokens
