@@ -164,7 +164,7 @@ func (alias AliasCommand) Run(args []string, env env.ShellEnvironment) error {
         }
 
         command := args[1]
-        if !utils.IsString(command) || !utils.IsRawString(command) {
+        if utils.IsString(command) || utils.IsRawString(command) {
             command = command[1:len(command)-1]
         }
         env.Aliases[aliasKey] = command
