@@ -9,7 +9,7 @@ func Lex(input string) []string {
 		switch char {
 		case ' ', '\r', '\t':
 			if current != "" {
-				if !isString {
+				if !isString && !isRawString {
 					tokens = append(tokens, current)
 					current = ""
 				} else {
@@ -24,14 +24,14 @@ func Lex(input string) []string {
 				current += string(char)
 			}
 		case '\'':
-            if isString {
-                current += string(char)
-            } else {
-                isRawString = !isRawString
-                current += string(char)
-            }
+			if isString {
+				current += string(char)
+			} else {
+				isRawString = !isRawString
+				current += string(char)
+			}
 		case '#':
-			if current == "" && !isString {
+			if current == "" && !isString && !isRawString {
 				return tokens
 			} else {
 				current += string(char)
