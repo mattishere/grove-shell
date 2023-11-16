@@ -14,11 +14,11 @@ func (alias AliasCommand) Name() string {
 }
 
 func (alias AliasCommand) Description() string {
-    return "create a new alias"
+	return "create a new alias"
 }
 
 func (alias AliasCommand) Usage() string {
-    return "alias [name] [command/\"command\"]"
+	return "alias [name] [command/\"command\"]"
 }
 
 func (alias AliasCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -34,11 +34,11 @@ func (alias AliasCommand) Run(args []string, env env.ShellEnvironment) error {
 		}
 		env.Aliases[aliasKey] = command
 	} else if len(args) == 0 {
-        final := "Aliases:\n"
+		final := "Aliases:\n"
 		for name, alias := range env.Aliases {
 			final += name + " -> " + alias + "\n"
 		}
-        fmt.Println(final)
+		fmt.Println(final)
 	}
 
 	return nil

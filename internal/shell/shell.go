@@ -14,13 +14,11 @@ import (
 	"github.com/groveshell/grove-shell/internal/run"
 )
 
-
-
 func StartShell() {
 	cmdHandler := command.NewCommandHandler()
-    for _, cmd := range command.Commands {
-        cmdHandler.RegisterNew(cmd)
-    }
+	for _, cmd := range command.Commands {
+		cmdHandler.RegisterNew(cmd)
+	}
 
 	env := env.ShellEnvironment{
 		Aliases: make(map[string]string),

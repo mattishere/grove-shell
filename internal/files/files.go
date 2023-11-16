@@ -18,22 +18,22 @@ func ReadFile(path string) ([]string, error) {
 }
 
 func ReadRCFile() []string {
-    homeDir, err := os.UserHomeDir()
-    if err != nil {
-        return nil
-    }
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return nil
+	}
 
-    path := filepath.Join(homeDir, ".groverc")
+	path := filepath.Join(homeDir, ".groverc")
 
-    _, err = os.Stat(path)
-    if err != nil {
-        return nil
-    }
+	_, err = os.Stat(path)
+	if err != nil {
+		return nil
+	}
 
-    data, err := ReadFile(path)
-    if err != nil {
-        return nil
-    }
+	data, err := ReadFile(path)
+	if err != nil {
+		return nil
+	}
 
-    return data
+	return data
 }

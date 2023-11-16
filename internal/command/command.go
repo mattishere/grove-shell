@@ -12,13 +12,13 @@ var (
 		PWDCommand{},
 		ExportCommand{},
 		AliasCommand{},
-        HelpCommand{},
+		HelpCommand{},
 	}
 )
 
 type Command interface {
 	Name() string
-    Description() string
-    Usage() string
+	Description() string
+	Usage() string
 	Run([]string, env.ShellEnvironment) error
 }

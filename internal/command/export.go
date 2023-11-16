@@ -17,11 +17,11 @@ func (export ExportCommand) Name() string {
 }
 
 func (export ExportCommand) Description() string {
-    return "export an environment variable"
+	return "export an environment variable"
 }
 
 func (export ExportCommand) Usage() string {
-    return "export [name] [value/\"value\"]..."
+	return "export [name] [value/\"value\"]..."
 }
 
 func (export ExportCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -60,4 +60,3 @@ func (export ExportCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	return fmt.Errorf("not enough arguments")
 }
-

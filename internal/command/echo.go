@@ -14,11 +14,11 @@ func (echo EchoCommand) Name() string {
 }
 
 func (echo EchoCommand) Description() string {
-    return "print text and variables in the terminal"
+	return "print text and variables in the terminal"
 }
 
 func (echo EchoCommand) Usage() string {
-    return "echo [text/\"text\"]..."
+	return "echo [text/\"text\"]..."
 }
 
 func (echo EchoCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -36,4 +36,3 @@ func (echo EchoCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	return nil
 }
-

@@ -15,11 +15,11 @@ func (cd CdCommand) Name() string {
 }
 
 func (cd CdCommand) Description() string {
-    return "change your current directory"
+	return "change your current directory"
 }
 
 func (cd CdCommand) Usage() string {
-    return "cd [path]"
+	return "cd [path]"
 }
 
 func (cd CdCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -45,4 +45,3 @@ func (cd CdCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	return nil
 }
-
