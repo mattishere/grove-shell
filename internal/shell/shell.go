@@ -5,20 +5,22 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/user"
 	"strings"
 
 	"github.com/groveshell/grove-shell/internal/command"
 	"github.com/groveshell/grove-shell/internal/env"
 	"github.com/groveshell/grove-shell/internal/files"
 	"github.com/groveshell/grove-shell/internal/run"
+	"github.com/groveshell/grove-shell/internal/utils"
 )
+
+
 
 func StartShell() {
 	cmdHandler := command.NewCommandHandler()
-	for _, cmd := range command.Commands {
-		cmdHandler.RegisterNew(cmd)
-	}
+    for _, cmd := range command.Commands {
+        cmdHandler.RegisterNew(cmd)
+    }
 
 	env := env.ShellEnvironment{
 		Aliases: make(map[string]string),
@@ -46,9 +48,16 @@ func StartShell() {
 	}
 
 	for {
-		prompt := Prompt()
+		prompt, err := utils.DefaultPrompt()
+        if err != nil {
+            prompt = "$ "
+        }
+
 		if value, exists := os.LookupEnv("PROMPT"); exists {
-			prompt = value
+            generatePrompt, err := utils.GeneratePrompt(value)
+            if err == nil {
+                prompt = generatePrompt
+            }
 		}
 
 		fmt.Print(prompt)
@@ -70,21 +79,4 @@ func StartShell() {
 	}
 }
 
-func Prompt() string {
-	wd, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)
-	}
 
-	host, err := os.Hostname()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	currUser, err := user.Current()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return "[" + currUser.Username + "@" + host + ":" + wd + "]$ "
-}

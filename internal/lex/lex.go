@@ -3,7 +3,7 @@ package lex
 func Lex(input string) []string {
 	var tokens []string
 	current := ""
-	var isString, isRawString bool
+	var isString, isRawString, isEscaped bool
 
 	for _, char := range input {
 		switch char {
@@ -17,8 +17,9 @@ func Lex(input string) []string {
 				}
 			}
 		case '"':
-			if isRawString {
+			if isRawString || isEscaped {
 				current += string(char)
+				isEscaped = false
 			} else {
 				isString = !isString
 				current += string(char)
@@ -30,6 +31,12 @@ func Lex(input string) []string {
 				isRawString = !isRawString
 				current += string(char)
 			}
+		case '\\':
+			if isString {
+				isEscaped = true
+			} else {
+				current += string(char)
+			}
 		case '#':
 			if current == "" && !isString && !isRawString {
 				return tokens
@@ -38,6 +45,7 @@ func Lex(input string) []string {
 			}
 		default:
 			current += string(char)
+			isEscaped = false
 		}
 	}
 

@@ -14,11 +14,11 @@ func (exit ExitCommand) Name() string {
 }
 
 func (exit ExitCommand) Description() string {
-	return "exit the shell"
+    return "exit the shell"
 }
 
 func (exit ExitCommand) Usage() string {
-	return "exit [code (0-255)]"
+    return "exit [code (0-255)]"
 }
 
 func (exit ExitCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -35,3 +35,4 @@ func (exit ExitCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	return nil
 }
+

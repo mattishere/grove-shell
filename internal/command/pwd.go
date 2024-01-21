@@ -14,11 +14,11 @@ func (pwd PWDCommand) Name() string {
 }
 
 func (pwd PWDCommand) Description() string {
-	return "print the current working directory"
+    return "print the current working directory"
 }
 
 func (pwd PWDCommand) Usage() string {
-	return "pwd"
+    return "pwd"
 }
 
 func (pwd PWDCommand) Run(args []string, env env.ShellEnvironment) error {
@@ -31,3 +31,4 @@ func (pwd PWDCommand) Run(args []string, env env.ShellEnvironment) error {
 
 	return nil
 }
+

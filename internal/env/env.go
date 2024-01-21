@@ -1,5 +1,5 @@
 package env
 
 type ShellEnvironment struct {
-	Aliases map[string]string
+	Aliases   map[string]string
 }

@@ -42,7 +42,6 @@ func RunCommand(handler *command.CommandHandler, input string, shellEnv env.Shel
 	}
 
 	if !exists {
-
 		command := exec.Command(commandName, args...)
 		command.Stdin = os.Stdin
 		command.Stdout = os.Stdout
@@ -50,7 +49,7 @@ func RunCommand(handler *command.CommandHandler, input string, shellEnv env.Shel
 
 		err := command.Run()
 		if err != nil {
-			return err
+            return err
 		}
 	}
 
