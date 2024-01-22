@@ -3,7 +3,7 @@ package command
 import (
 	"fmt"
 
-	"github.com/groveshell/grove-shell/internal/env"
+	"github.com/mattishere/grove-shell/internal/env"
 )
 
 type HelpCommand struct{}

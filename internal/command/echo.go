@@ -3,8 +3,8 @@ package command
 import (
 	"fmt"
 
-	"github.com/groveshell/grove-shell/internal/env"
-	"github.com/groveshell/grove-shell/internal/utils"
+	"github.com/mattishere/grove-shell/internal/env"
+	"github.com/mattishere/grove-shell/internal/utils"
 )
 
 type EchoCommand struct{}

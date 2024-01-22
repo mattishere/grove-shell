@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/groveshell/grove-shell/internal/env"
+	"github.com/mattishere/grove-shell/internal/env"
 )
 
 type PWDCommand struct{}

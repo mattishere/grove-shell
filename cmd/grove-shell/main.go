@@ -1,6 +1,6 @@
 package main
 
-import "github.com/groveshell/grove-shell/internal/shell"
+import "github.com/mattishere/grove-shell/internal/shell"
 
 func main() {
 	shell.StartShell()

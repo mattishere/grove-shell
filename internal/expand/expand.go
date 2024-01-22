@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/groveshell/grove-shell/internal/utils"
+	"github.com/mattishere/grove-shell/internal/utils"
 )
 
 type Expander interface {

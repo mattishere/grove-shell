@@ -10,7 +10,7 @@ uninstall:
 	@rm -rf $(DESTDIR)/usr/local/bin/grove
 	@echo "Uninstalled Grove."
 
-register_shell:
+register:
 	@echo "$(DESTDIR)/usr/local/bin/grove" | tee -a /etc/shells > /dev/null
 	@echo "Registered Grove as a shell."
 
