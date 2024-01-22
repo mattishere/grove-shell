@@ -41,8 +41,10 @@ func StartShell() {
 
 	reader := bufio.NewReader(os.Stdin)
 	rc := files.ReadRCFile()
-	for _, line := range rc[0 : len(rc)-1] {
-		run.RunCommand(cmdHandler, line, env)
+	if len(rc) > 0 {
+		for _, line := range rc[0 : len(rc)-1] {
+			run.RunCommand(cmdHandler, line, env)
+		}
 	}
 
 	for {
