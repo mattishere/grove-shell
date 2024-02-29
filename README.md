@@ -28,7 +28,7 @@ Afterwards, you can also use `make register`, which registers the shell in the /
 - Prompt customization by setting the `$PROFILE` environment variable, with placeholders:
 <table>
 <tr>
-    <th>Placeholder<th>
+    <th>Placeholder</th>
     <th>Description</th>
 </tr>
 <tr>
