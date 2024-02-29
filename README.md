@@ -54,4 +54,5 @@ Afterwards, you can also use `make register`, which registers the shell in the /
 <tr>
     <td>{black|red|green|yellow|blue|magenta|cyan|white}</td>
     <td>Different color options</td>
+</tr>
 </table>
